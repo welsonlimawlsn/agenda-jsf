@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+   <title>Agenda</title>
+</h:head>
+<f:metadata>
+   <f:viewAction action="#{agendaBean.init}"/>
+</f:metadata>
+<h:body>
+   <div>
+   <p:button outcome="addContato?faces-redirect=true" value="Adicionar Contato" icon="ui-icon-plus"/>
+</div>
+   <h:form>
+      <p:dataTable var="contato" value="#{agendaBean.contatos}" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+         <p:column headerText="Id">
+            <h:outputText value="#{contato.id}"/>
+         </p:column>
+         <p:column headerText="Nome">
+            <h:outputText value="#{contato.nome}"/>
+         </p:column>
+         <p:column headerText="Telefone">
+            <h:outputText value="#{contato.telefone}"/>
+         </p:column>
+         <p:column headerText="Email">
+            <h:outputText value="#{contato.email}"/>
+         </p:column>
+      </p:dataTable>
+   </h:form>
+</h:body>
+</html>
