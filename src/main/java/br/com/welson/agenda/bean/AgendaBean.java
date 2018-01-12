@@ -24,6 +24,21 @@ public class AgendaBean implements Serializable {
         }
     }
 
+    public String excluir(Contato contato) {
+        try {
+            contato.excluir();
+        } catch (Exception e) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), "");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        return "index?faces-redirect=true";
+    }
+
+    public String alterar(Contato contato) {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("contato", contato);
+        return "editarContato.xhtml?faces-redirect=true";
+    }
+
     public List<Contato> getContatos() {
         return contatos;
     }
@@ -31,4 +46,6 @@ public class AgendaBean implements Serializable {
     public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
     }
+
+
 }

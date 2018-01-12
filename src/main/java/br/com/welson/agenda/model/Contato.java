@@ -20,6 +20,22 @@ public class Contato {
         }
     }
 
+    public void excluir() throws Exception {
+        try(Sql sql = new Sql()) {
+            sql.command("DELETE FROM contatos WHERE id_contato = ? ", String.valueOf(id));
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void alterar() throws Exception {
+        try(Sql sql = new Sql()){
+            sql.command("UPDATE contatos SET nome = ?, email = ?, telefone = ?  WHERE id_contato = ?", nome, email, telefone, String.valueOf(id));
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public static List<Contato> listAll() throws Exception {
         List<Contato> contatos = new ArrayList<>();
         try(Sql sql = new Sql()){
@@ -68,5 +84,20 @@ public class Contato {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contato contato = (Contato) o;
+
+        return id == contato.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
